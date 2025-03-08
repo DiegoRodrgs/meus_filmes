@@ -53,10 +53,6 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
 
   void _saveForm() {
     if (_formKey.currentState!.validate()) {
-      if (posterPath.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Selecione um cartaz para o filme.')));
-        return;
-      }
       Movie movie = Movie(
         id: widget.movie?.id,
         title: _titleController.text,
@@ -67,9 +63,13 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
         rating: rating,
       );
       Navigator.pop(context, movie);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Filme salvo com sucesso!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Filme salvo com sucesso!')),
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Por favor, corrija os erros do formulário.')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, corrija os erros do formulário.')),
+      );
     }
   }
 
@@ -86,7 +86,10 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Título', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                  labelText: 'Título',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Informe o título do filme.';
@@ -97,7 +100,10 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _yearController,
-                decoration: const InputDecoration(labelText: 'Ano', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                  labelText: 'Ano',
+                  border: OutlineInputBorder(),
+                ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -112,7 +118,10 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _directorController,
-                decoration: const InputDecoration(labelText: 'Direção', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                  labelText: 'Direção',
+                  border: OutlineInputBorder(),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Informe o diretor do filme.';
@@ -123,7 +132,10 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
               const SizedBox(height: 16),
               TextFormField(
                 controller: _summaryController,
-                decoration: const InputDecoration(labelText: 'Resumo', border: OutlineInputBorder()),
+                decoration: const InputDecoration(
+                  labelText: 'Resumo',
+                  border: OutlineInputBorder(),
+                ),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -142,7 +154,12 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
                   ),
                   const SizedBox(width: 16),
                   posterPath.isNotEmpty
-                      ? Image.file(File(posterPath), width: 50, height: 75, fit: BoxFit.cover)
+                      ? Image.file(
+                    File(posterPath),
+                    width: 50,
+                    height: 75,
+                    fit: BoxFit.cover,
+                  )
                       : const Text('Nenhum cartaz selecionado'),
                 ],
               ),
@@ -160,7 +177,10 @@ class _MovieFormScreenState extends State<MovieFormScreen> {
                     allowHalfRating: true,
                     itemCount: 5,
                     itemPadding: const EdgeInsets.symmetric(horizontal: 2.0),
-                    itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
                     onRatingUpdate: (newRating) {
                       setState(() {
                         rating = newRating;
